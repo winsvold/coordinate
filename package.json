@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "a small typescript library for managing coordinates",
   "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest",
     "prepare": "npm run build",
