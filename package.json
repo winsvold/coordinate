@@ -4,6 +4,9 @@
   "description": "a small typescript library for managing coordinates",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "test": "jest",
     "prepare": "npm run build",
@@ -19,9 +22,6 @@
     ],
     "testRegex": "^.+\\.test\\.ts$"
   },
-  "files": [
-    "lib"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/winsvold/coordinate.git"
