@@ -49,7 +49,7 @@ test('multiply by scalar multiplies coordinate by scalar', () => {
 });
 
 test('getRelativePositionToCoordinate returns relative position to another coordinate', () => {
-   const result = new Coordinate(2, 2).getRelativePostitionToCoordinate(new Coordinate(0, 0));
+   const result = new Coordinate(2, 2).getRelativePostitionTo(new Coordinate(0, 0));
 
    expect(result).toEqual(new Coordinate(-2, -2));
 });
@@ -108,4 +108,13 @@ test('addToLength() adds supplied argument to length', () => {
     const result = coordinate.addToLength(2);
 
     expect(result).toEqual(new Coordinate(3, 0));
+});
+
+test('getPolarCoordinate() returns polar coordinate', () => {
+    const polar = new Coordinate(2, 2).getPolarCoordinate();
+
+    expect(polar.length.toFixed(2)).toEqual('2.83');
+    expect(polar.angle.toFixed(2)).toEqual('0.79');
+    expect(polar.getX().toFixed(2)).toEqual('2.00');
+    expect(polar.getY().toFixed(2)).toEqual('2.00');
 });

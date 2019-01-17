@@ -1,3 +1,5 @@
+import PolarCoordinate from "./PolarCoordinate";
+
 class Coordinate {
     public x: number;
     public y: number;
@@ -19,7 +21,10 @@ class Coordinate {
         return this.getRadians() * 180 / Math.PI;
     }
 
-    addCoordinate(coordinate: Coordinate){
+    addCoordinate(coordinate: Coordinate | PolarCoordinate): Coordinate{
+        if (coordinate instanceof PolarCoordinate) {
+            return this.addCoordinate(coordinate.getCartesianCoordinate());
+        }
         return new Coordinate(this.x + coordinate.x, this.y + coordinate.y);
     }
 
@@ -27,7 +32,10 @@ class Coordinate {
         return new Coordinate(this.x * scalar, this.y * scalar);
     }
 
-    getRelativePostitionToCoordinate(coordinate: Coordinate){
+    getRelativePostitionTo(coordinate: Coordinate | PolarCoordinate): Coordinate{
+        if (coordinate instanceof PolarCoordinate) {
+            return this.getRelativePostitionTo(coordinate.getCartesianCoordinate());
+        }
         return new Coordinate(coordinate.x - this.x,coordinate.y - this.y);
     }
 
@@ -55,6 +63,10 @@ class Coordinate {
 
     addToLength(addLength: number) {
         return this.withLength(this.getLength() + addLength);
+    }
+
+    getPolarCoordinate() {
+        return new PolarCoordinate(this.getLength(), this.getRadians());
     }
 
     toString() {
