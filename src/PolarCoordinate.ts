@@ -4,9 +4,14 @@ class PolarCoordinate {
     public length: number;
     public angle: number;
 
-    constructor(length: number = 0, angle: number = 0) {
-        this.length = length;
-        this.angle = angle;
+    constructor(length: number | PolarCoordinate = 0, angle: number = 0) {
+        if (length instanceof PolarCoordinate) {
+            this.length = length.length;
+            this.angle = length.angle;
+        } else {
+            this.length = length;
+            this.angle = angle;
+        }
     }
 
     getX() {
@@ -22,7 +27,7 @@ class PolarCoordinate {
     }
 
     addCoordinate(coordinate: PolarCoordinate | Coordinate) {
-        const newCoordinate =  this.getCartesianCoordinate().addCoordinate(coordinate).getPolarCoordinate();
+        const newCoordinate = this.getCartesianCoordinate().addCoordinate(coordinate).getPolarCoordinate();
         this.length = newCoordinate.length;
         this.angle = newCoordinate.angle;
         return this;
@@ -38,7 +43,7 @@ class PolarCoordinate {
     }
 
     withDegrees(angleDegrees: number) {
-        this.angle= angleDegrees * Math.PI / 180;
+        this.angle = angleDegrees * Math.PI / 180;
         return this;
     }
 
