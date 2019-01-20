@@ -22,23 +22,29 @@ class PolarCoordinate {
     }
 
     addCoordinate(coordinate: PolarCoordinate | Coordinate) {
-        return this.getCartesianCoordinate().addCoordinate(coordinate).getPolarCoordinate();
+        const newCoordinate =  this.getCartesianCoordinate().addCoordinate(coordinate).getPolarCoordinate();
+        this.length = newCoordinate.length;
+        this.angle = newCoordinate.angle;
+        return this;
     }
 
     muliplyLengthBy(scalar: number) {
-        return new PolarCoordinate(this.length * scalar, this.angle);
+        this.length *= scalar;
+        return this;
     }
 
     getRelativePositionTo(coordinate: Coordinate | PolarCoordinate) {
-        return this.getCartesianCoordinate().getRelativePostitionTo(coordinate).getPolarCoordinate();
+        return this.getCartesianCoordinate().getRelativePostitionTo(coordinate);
     }
 
     withDegrees(angleDegrees: number) {
-        return new PolarCoordinate(this.length, angleDegrees * Math.PI / 180);
+        this.angle= angleDegrees * Math.PI / 180;
+        return this;
     }
 
     rotateRadians(rotateRadians: number) {
-        return new PolarCoordinate(this.length, this.angle + rotateRadians);
+        this.angle += rotateRadians;
+        return this;
     }
 
     rotateDegrees(angle: number) {
@@ -46,7 +52,8 @@ class PolarCoordinate {
     }
 
     addToLength(addLength: number) {
-        return new PolarCoordinate(this.length + addLength, this.angle);
+        this.length += addLength;
+        return this;
     }
 
     getCartesianCoordinate() {

@@ -4,13 +4,18 @@ class Coordinate {
     public x: number;
     public y: number;
 
-    constructor(x: number = 0, y: number = 0) {
-        this.x = x;
-        this.y = y;
+    constructor(x: number | Coordinate = 0, y: number = 0) {
+        if (x instanceof Coordinate) {
+            this.x = x.x;
+            this.y = x.y;
+        } else {
+            this.x = x;
+            this.y = y;
+        }
     }
 
     getLength() {
-        return Math.sqrt(this.x*this.x + this.y*this.y);
+        return Math.sqrt(this.x * this.x + this.y * this.y);
     }
 
     getRadians() {
@@ -21,32 +26,40 @@ class Coordinate {
         return this.getRadians() * 180 / Math.PI;
     }
 
-    addCoordinate(coordinate: Coordinate | PolarCoordinate): Coordinate{
+    addCoordinate(coordinate: Coordinate | PolarCoordinate): Coordinate {
         if (coordinate instanceof PolarCoordinate) {
             return this.addCoordinate(coordinate.getCartesianCoordinate());
         }
-        return new Coordinate(this.x + coordinate.x, this.y + coordinate.y);
+        this.x += coordinate.x;
+        this.y += coordinate.y;
+        return this;
     }
 
-    multiplyLengthBy(scalar: number){
-        return new Coordinate(this.x * scalar, this.y * scalar);
+    multiplyLengthBy(scalar: number) {
+        this.x *= scalar;
+        this.y *= scalar;
+        return this;
     }
 
-    getRelativePostitionTo(coordinate: Coordinate | PolarCoordinate): Coordinate{
+    getRelativePostitionTo(coordinate: Coordinate | PolarCoordinate): Coordinate {
         if (coordinate instanceof PolarCoordinate) {
             return this.getRelativePostitionTo(coordinate.getCartesianCoordinate());
         }
-        return new Coordinate(coordinate.x - this.x,coordinate.y - this.y);
+        return new Coordinate(coordinate.x - this.x, coordinate.y - this.y);
     }
 
     withLength(newLength: number) {
         const ratio = newLength / this.getLength();
-        return new Coordinate(this.x * ratio, this.y * ratio);
+        this.x *= ratio;
+        this.y *= ratio;
+        return this;
     }
 
     withRadians(newAngle: number) {
         const length = this.getLength();
-        return new Coordinate(length * Math.cos(newAngle),length * Math.sin(newAngle));
+        this.x = length * Math.cos(newAngle);
+        this.y = length * Math.sin(newAngle);
+        return this;
     }
 
     withDegrees(newAngleDegrees: number) {

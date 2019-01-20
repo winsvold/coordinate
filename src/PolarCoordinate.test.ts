@@ -51,7 +51,7 @@ test('multiplyLengthBy() multiplies length by supplied argument', () => {
 test('getRelativePositionTo() returns relative position to supplied coordinate', () => {
     const result = new PolarCoordinate(1, 0).getRelativePositionTo(new PolarCoordinate(3, 0));
 
-    expect(result).toEqual(new PolarCoordinate(2, 0));
+    expect(result).toEqual(new Coordinate(2, 0));
 });
 
 test('withDegrees() returns polar coordinate with angle supplied in degrees', () => {
