@@ -4,14 +4,13 @@ class Coordinate {
     public x: number;
     public y: number;
 
-    constructor(x: number | Coordinate = 0, y: number = 0) {
-        if (x instanceof Coordinate) {
-            this.x = x.x;
-            this.y = x.y;
-        } else {
-            this.x = x;
-            this.y = y;
-        }
+    constructor(x: number = 0, y: number = 0) {
+        this.x = x;
+        this.y = y;
+    }
+
+    clone() {
+        return new Coordinate(this.x, this.y);
     }
 
     getLength() {

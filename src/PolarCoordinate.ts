@@ -4,14 +4,13 @@ class PolarCoordinate {
     public length: number;
     public angle: number;
 
-    constructor(length: number | PolarCoordinate = 0, angle: number = 0) {
-        if (length instanceof PolarCoordinate) {
-            this.length = length.length;
-            this.angle = length.angle;
-        } else {
-            this.length = length;
-            this.angle = angle;
-        }
+    constructor(length: number = 0, angle: number = 0) {
+        this.length = length;
+        this.angle = angle;
+    }
+
+    clone() {
+        return new PolarCoordinate(this.length, this.angle);
     }
 
     getX() {

@@ -118,3 +118,12 @@ test('getPolarCoordinate() returns polar coordinate', () => {
     expect(polar.getX().toFixed(2)).toEqual('2.00');
     expect(polar.getY().toFixed(2)).toEqual('2.00');
 });
+
+test('clone() returns new coordinate with same parameters', () => {
+    const coordinate = new Coordinate(2, 2);
+
+    const clone = coordinate.clone();
+
+    expect(clone).not.toBe(coordinate);
+    expect(clone).toEqual(coordinate);
+});

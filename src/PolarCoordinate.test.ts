@@ -71,3 +71,12 @@ test('addToLength() adds supplied length to coordinate', () => {
 
     expect(result).toEqual(new PolarCoordinate(4, 0));
 });
+
+test('clone() returns new coordinate with same parameters', () => {
+    const coordinate = new PolarCoordinate(2, Math.PI);
+
+    const clone = coordinate.clone();
+
+    expect(clone).not.toBe(coordinate);
+    expect(clone).toEqual(coordinate);
+});
