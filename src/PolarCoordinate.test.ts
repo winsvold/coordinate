@@ -60,6 +60,18 @@ test('withDegrees() returns polar coordinate with angle supplied in degrees', ()
     expect(result.angle).toEqual(Math.PI);
 });
 
+test('withRadians() returns polar coordinate with angle supplied in radians', () => {
+    const result = new PolarCoordinate(0, 0).withRadians(3);
+
+    expect(result.angle).toEqual(3);
+});
+
+test('withLength() returns polar coordinate with length supplied', () => {
+    const result = new PolarCoordinate(0, 0).withLength(2);
+
+    expect(result.length).toEqual(2);
+});
+
 test('rotateDegrees() rotates coordinate by angle supplied in degrees', () => {
     const result = new PolarCoordinate(1, Math.PI / 2).rotateDegrees(-90);
 

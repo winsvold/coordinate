@@ -46,6 +46,16 @@ class PolarCoordinate {
         return this;
     }
 
+    withRadians(angleRadians: number) {
+        this.angle = angleRadians;
+        return this;
+    }
+
+    withLength(length: number) {
+        this.length = length;
+        return this;
+    }
+
     rotateRadians(rotateRadians: number) {
         this.angle += rotateRadians;
         return this;
